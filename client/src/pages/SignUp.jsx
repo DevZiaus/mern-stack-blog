@@ -48,7 +48,7 @@ export default function SignUp() {
               Blog
           </Link>
           <p className='text-sm mt-5'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi odio minima nemo quae ut, harum illum sunt, voluptates tenetur accusantium quos tempore quisquam magni non sed sapiente explicabo neque recusandae!
+          Welcome to our most awesome Blog! You can Sign Up with Your email and password or with Google. 
           </p>
         </div>
         <div className='flex-1'>
