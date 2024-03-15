@@ -7,6 +7,7 @@ import { app } from '../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import { useNavigate } from 'react-router-dom'
+// import jwt_decode from 'jwt-decode'; // Import jwt-decode library
 
 export default function CreatePost() {
     const [file, setFile] = useState(null);
@@ -54,6 +55,15 @@ export default function CreatePost() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+
+        // // Extract username from JWT token
+        // const token = localStorage.getItem('access_token');
+        // const decodedToken = jwt_decode(token);
+        // const username = decodedToken.username;
+
+        // // Add username to formData
+        // const updatedFormData = { ...formData, author: username };
+
         try {
             const res = await fetch('/api/post/create-post', {
                 method: 'POST',
@@ -63,7 +73,6 @@ export default function CreatePost() {
                 body: JSON.stringify(formData),
             });
             const data = await res.json();
-            console.log(data.slug);
             if (!res.ok) {
                 setPublishError(data.message);
                 return;
@@ -74,7 +83,7 @@ export default function CreatePost() {
         } catch (error) {
             setPublishError('Something went wrong!');
         }
-    }
+    };
 
   return (
     <div className='p-3 max-w-3xl nx-auto min-h-screen'>

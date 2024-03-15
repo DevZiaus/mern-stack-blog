@@ -2,6 +2,10 @@ import mongoose from "mongoose"
 
 const postSchema = new mongoose.Schema(
     {
+        author: {
+            type: String,
+            required: true,
+        },
         userId: {
             type: String,
             required: true,

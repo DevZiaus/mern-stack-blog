@@ -181,7 +181,7 @@ export default function DashboardProfile() {
         />
         <TextInput type='password' id='password' placeholder='********' onChange={handleChange}
         />
-        <Button type='submit' gradientDuoTone='purpleToBlue' outline disable={loading || imagefileUploading }>
+        <Button type='submit' gradientDuoTone='purpleToBlue' outline disabled={loading || imagefileUploading }>
           { loading? 'Loading...' : 'Update'}
         </Button>
         {
