@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express from "express";
 import { test, updateUser, deleteUser, signout } from "../controllers/user.controller.js";
 import { verifyToken } from "../utils/verifyUser.js";
 
