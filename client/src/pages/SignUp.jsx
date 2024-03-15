@@ -28,18 +28,30 @@ export default function SignUp() {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if (data.success === false) {
-        return setErrorMessage(data.message);
+      if (!res.ok) {
+        throw new Error(data.message || 'An error occurred'); // Throw an error if response not ok
       }
-      setLoading(false);
-      if (res.ok) {
-        navigate('/sign-in');
-      }
+  
+      // If no error and res.ok is true, navigate to sign-in
+      navigate('/sign-in');
     } catch (error) {
-      setErrorMessage(error.message);
-      setLoading(false);
+      setErrorMessage(error.message || 'Failed to sign up');
+    } finally {
+      setLoading(false); // This will run regardless of try/catch outcome
     }
   };
+  //     if (data.success === false) {
+  //       return setErrorMessage(data.message);
+  //     }
+  //     setLoading(false);
+  //     if (res.ok) {
+  //       navigate('/sign-in');
+  //     }
+  //   } catch (error) {
+  //     setErrorMessage(error.message);
+  //     setLoading(false);
+  //   }
+  // };
   return (
     <div className='min-h-screen mt-20'>
       <div className='flex flex-col md:flex-row md:items-center p-3 max-w-3xl mx-auto gap-5'>
