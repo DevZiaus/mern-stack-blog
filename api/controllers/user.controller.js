@@ -30,13 +30,30 @@ export const updateUser = async( req, res, next ) => {
             return next(errorHandler(400, 'Username can contain only letters and numbers'));
         }
     }
+    if (req.body.name) {
+        if (req.body.name.length < 5 || req.body.name.length > 20) {
+            return next(errorHandler(400, 'Name must be between 5 and 20 characters'));
+        }
+        if (!req.body.name.match(/^[a-zA-Z\s]+$/)) { // Changed from username to name, allow spaces
+            return next(errorHandler(400, 'Name can contain only letters'));
+        }
+    }
+    
+    if (req.body.bio) {
+        if (req.body.bio.trim() === '') { // Ensures bio isn't just whitespace
+            return next(errorHandler(400, 'Nothing written about yourself'));
+        }
+    }
+    
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.userID, {
             $set: {
                 username: req.body.username,
+                name: req.body.name,
                 email: req.body.email,
                 profilePicture: req.body.profilePicture,
                 password: req.body.password,
+                bio: req.body.bio,
             },
         }, { new: true });
         const { password, ...rest } = updatedUser._doc;

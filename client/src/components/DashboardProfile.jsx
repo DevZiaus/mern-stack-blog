@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, TextInput } from 'flowbite-react'
+import { Alert, Button, Modal, TextInput,Textarea } from 'flowbite-react'
 import React, { useEffect, useRef, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
@@ -177,10 +177,12 @@ export default function DashboardProfile() {
         
         <TextInput type='text' id='username' placeholder='@devziaus' defaultValue={currentUser.username} onChange={handleChange}
         />
+        <TextInput type='text' id='name' placeholder='John Doe' defaultValue={currentUser.name} onChange={handleChange} />
         <TextInput type='email' id='email' placeholder='username@company.com' defaultValue={currentUser.email} onChange={handleChange}
         />
         <TextInput type='password' id='password' placeholder='********' onChange={handleChange}
         />
+        <Textarea id='bio' placeholder='About you' rows='5' onChange={handleChange}>{currentUser.bio}</Textarea>
         <Button type='submit' gradientDuoTone='purpleToBlue' outline disabled={loading || imagefileUploading }>
           { loading? 'Loading...' : 'Update'}
         </Button>

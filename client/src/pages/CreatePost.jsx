@@ -86,7 +86,7 @@ export default function CreatePost() {
     };
 
   return (
-    <div className='p-3 max-w-3xl nx-auto min-h-screen'>
+    <div className='p-3 max-w-3xl mx-auto min-h-screen'>
         <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
         <form className='flex flex-col gap-4' onSubmit={handleSubmit} >
             <div className='flex flex-col gap-4 sm:flex-row sm:justify-between'>
@@ -118,6 +118,16 @@ export default function CreatePost() {
                     className='w-full h-72 object-cover'
                 />
             )}
+            <TextInput
+                type='text'
+                placeholder='Tags (Comma "," separated)'
+                id='tags'
+                className='flex-1'
+                onChange={(e) => {
+                    const tagsArray = e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+                    setFormData({ ...formData, tags: tagsArray });
+                }}
+            />
             <ReactQuill theme='snow' placeholder='Write down your idea' className='h-72 mb-12' required onChange={
                 (value) => {
                     setFormData({ ...formData, content: value })
