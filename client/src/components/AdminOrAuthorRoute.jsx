@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Outlet, Navigate } from 'react-router-dom';
 
-export default function OnlyAdminRoute() {
+export default function AdminOrAuthorRoute() {
     const { currentUser } = useSelector((state) => state.user);
-  return currentUser && currentUser.role === 'admin' ? <Outlet /> : <Navigate to='/sign-in' />;
+  return currentUser && (currentUser.role === 'admin' || currentUser.role === 'author')  ? <Outlet /> : <Navigate to='/sign-in' />;
 }

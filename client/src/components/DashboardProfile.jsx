@@ -185,7 +185,7 @@ export default function DashboardProfile() {
           { loading? 'Loading...' : 'Update'}
         </Button>
         {
-          currentUser.isAdmin && (
+          (currentUser.role === 'admin' || currentUser.role === 'author') && (
             <Link to={'/create-post'}>
               <Button type='button' gradientDuoTone='purpleToPink' className='w-full'>
                 Create a post

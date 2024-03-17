@@ -9,7 +9,7 @@ export default function UserAllPosts() {
   return (
     <div>
         {
-          currentUser.isAdmin && (
+          (currentUser.role === 'admin' || currentUser.role === 'author') && (
             <Link to={'/create-post'}>
               <Button type='button' gradientDuoTone='purpleToPink' className='w-full'>
                 Create a post

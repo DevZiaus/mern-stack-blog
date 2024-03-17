@@ -37,6 +37,16 @@ export default function DashboardSidebar() {
     }
   };
 
+  const findUserType = () => {
+    if (currentUser.role === 'admin') {
+      return 'Admin';
+    } else if (currentUser.role === 'author') {
+      return 'Author';
+    } else {
+      return 'User';
+    }
+  }
+
   return (
     <Sidebar className='w-full md:w-56'>
         <Sidebar.Items>
@@ -45,14 +55,14 @@ export default function DashboardSidebar() {
                     <Sidebar.Item 
                       active={tab === 'profile'} 
                       icon={HiUser} 
-                      label={currentUser.isAdmin ? 'Admin' : 'User'} 
+                      label={findUserType()} 
                       labelColor='dark' 
                       as='div'
                     >
                         Profile
                     </Sidebar.Item>
                 </Link>
-                {currentUser.isAdmin && (
+                {(currentUser.role === 'admin' || currentUser.role === 'author') && (
                   <Link to='/dashboard?tab=posts'>
                     <Sidebar.Item 
                       active={ tab === 'posts' }

@@ -3,7 +3,7 @@ import { errorHandler } from "../utils/error.js"
 
 export const createPost = async(req, res, next) => {
     console.log(req.user);
-    if (!req.user.isAdmin) {
+    if (!req.user.role === 'admin' || !req.user.role === 'author') {
         return next(errorHandler(403, 'You are not allowed to create a post'));
     }
     if (!req.body.title || !req.body.content) {

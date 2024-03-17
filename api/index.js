@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const DB = process.env.MONGODBS;
+const DB = process.env.ONLINE_MONGODB || process.env.LOCAL_MONGODB;
 
 mongoose.connect(DB).then(
     () => { console.log('MongoDB is Connected'); 

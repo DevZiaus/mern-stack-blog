@@ -11,6 +11,7 @@ import FooterCom from './components/Footer'
 import PrivateRoute from './components/PrivateRoute'
 import OnlyAdminRoute from './components/OnlyAdminRoute'
 import CreatePost from './pages/CreatePost'
+import AdminOrAuthorRoute from './components/AdminOrAuthorRoute'
 
 
 export default function App() {
@@ -26,7 +27,7 @@ export default function App() {
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>
-        <Route element={<OnlyAdminRoute />}>
+        <Route element={<AdminOrAuthorRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
         </Route>
         <Route path='/projects' element={<Projects />} />

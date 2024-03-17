@@ -11,8 +11,8 @@ export const signup = async (req, res, next) => {
     if (req.body.password.length < 8) {
         return next(errorHandler(400, 'Password must be at least 8 characters'));
     }
-    if (req.body.username.length < 7 || req.body.username.length > 20) {
-        return next(errorHandler(400, 'Username must be between 7 and 20 characters'));
+    if (req.body.username.length < 5 || req.body.username.length > 20) {
+        return next(errorHandler(400, 'Username must be between 5 and 20 characters'));
     }
     if (req.body.username.includes(' ')) {
         return next(errorHandler(400, 'Username can not contain spaces'));
@@ -60,7 +60,7 @@ export const signin = async (req, res, next) => {
         }
 
         const token = jwt.sign(
-            { id: validUser._id, username:validUser.username, isAdmin: validUser.isAdmin },
+            { id: validUser._id, username:validUser.username, role: validUser.role },
             process.env.JWT_SECRET,
         );
 
@@ -84,7 +84,7 @@ export const google = async (req, res, next) => {
             const token = jwt.sign({
                 id: user._id,
                 username: user.username,
-                isAdmin: user.isAdmin
+                role: user.role
             },
                 process.env.JWT_SECRET,
             );
@@ -105,7 +105,7 @@ export const google = async (req, res, next) => {
             const token = jwt.sign({
                 id: newUser._id,
                 username: newUser.username,
-                isAdmin: newUser.isAdmin
+                role: newUser.role
             },
             process.env.JWT_SECRET );
             const { password, ...rest } = newUser._doc;
