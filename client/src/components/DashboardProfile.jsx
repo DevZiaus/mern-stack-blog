@@ -17,6 +17,7 @@ export default function DashboardProfile() {
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
   const [imagefileUploading, setImageFileUploading] =useState(false);
   const [formData, setFormData] = useState({});
+  
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -70,13 +71,31 @@ export default function DashboardProfile() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
+  // const handleChange = (e) => {
+  //   const { id, value } = e.target;
+  //   // Checking if the field belongs to the 'links' object
+  //   if (Object.keys(currentUser.links).includes(id)) {
+  //       setFormData({
+  //           ...formData,
+  //           links: {
+  //               ...formData.links,
+  //               [id]: value, // Update the specific link
+  //           },
+  //       });
+  //   } else {
+  //       // For non-link fields, update the form data as before
+  //       setFormData({ ...formData, [id]: value });
+  //   }
+  //   console.log(formData.links);
+  // };
+
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     setUpdateUserError(null);
     setUpdateUserSuccess(null);
     if (Object.keys(formData).length === 0) {
-      setUpdateUserError('NO changes made!');
+      setUpdateUserError('No changes made!');
       return;
     }
     if (imagefileUploading) {
@@ -182,7 +201,21 @@ export default function DashboardProfile() {
         />
         <TextInput type='password' id='password' placeholder='********' onChange={handleChange}
         />
-        <Textarea id='bio' placeholder='About you' rows='5' onChange={handleChange}>{currentUser.bio}</Textarea>
+        <Textarea
+          id='bio'
+          placeholder='About you'
+          rows='5'
+          onChange={handleChange}
+          defaultValue={currentUser.bio} // Use defaultValue to set initial value
+        />
+        {/* <TextInput type="text" id="github" placeholder="https://github.com/username" defaultValue={currentUser.links.github || ''} onChange={handleChange} />
+        <TextInput type="text" id="website" placeholder="https://www.example.com" defaultValue={currentUser.links.website || ''} onChange={handleChange} />
+        <TextInput type="text" id="facebook" placeholder="https://facebook.com/username" defaultValue={currentUser.links.facebook || ''} onChange={handleChange} />
+        <TextInput type="text" id="twitter" placeholder="https://twitter.com/username" defaultValue={currentUser.links.twitter || ''} onChange={handleChange} />
+        <TextInput type="text" id="instagram" placeholder="https://instagram.com/username" defaultValue={currentUser.links.instagram || ''} onChange={handleChange} />
+        <TextInput type="text" id="linkedin" placeholder="https://linkedin.com/in/username" defaultValue={currentUser.links.linkedin || ''} onChange={handleChange} />
+        <TextInput type="text" id="youtube" placeholder="https://youtube.com/@yourhandle" defaultValue={currentUser.links.youtube || ''} onChange={handleChange} /> */}
+
         <Button type='submit' gradientDuoTone='purpleToBlue' outline disabled={loading || imagefileUploading }>
           { loading? 'Loading...' : 'Update'}
         </Button>

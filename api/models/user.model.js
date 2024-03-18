@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -21,10 +21,13 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
     links:{
-        website:String,
-        facebook:String,
-        youtube:String,
-        github:String
+        github: String,
+        website: String,
+        facebook: String,
+        twitter: String,
+        instagram:String,
+        linkedin: String,
+        youtube: String,
     },
     password: {
         type: String,

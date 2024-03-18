@@ -61,6 +61,40 @@ export const updateUser = async( req, res, next ) => {
     } catch (error) {
         next(error);
     }
+    // try {
+    //     // Retrieve the existing user from the database
+    //     const existingUser = await User.findById(req.params.userID);
+    //     if (!existingUser) {
+    //         return next(errorHandler(404, 'User not found'));
+    //     }
+    
+    //     // Construct the updated links object by merging existing links with new links
+    //     const updatedLinks = {
+    //         ...existingUser.links, // Existing links from the database
+    //         ...req.body.links // New links received in the request body
+    //     };
+    
+    //     // Update the user document in the database
+    //     const updatedUser = await User.findByIdAndUpdate(req.params.userID, {
+    //         $set: {
+    //             // Update other fields as needed
+    //             username: req.body.username,
+    //             name: req.body.name,
+    //             email: req.body.email,
+    //             profilePicture: req.body.profilePicture,
+    //             password: req.body.password,
+    //             bio: req.body.bio,
+    //             links: updatedLinks // Set the updated links object
+    //         }
+    //     }, { new: true });
+    
+    //     // Respond with the updated user data
+    //     const { password, ...rest } = updatedUser._doc;
+    //     res.status(200).json(rest);
+    // } catch (error) {
+    //     next(error);
+    // }
+    
 };
 
 export const deleteUser = async(req, res, next) => {
