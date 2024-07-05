@@ -1,21 +1,56 @@
 import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { app } from '../firebase'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 // import jwt_decode from 'jwt-decode'; // Import jwt-decode library
 
-export default function CreatePost() {
+export default function UpdatePost() {
     const [file, setFile] = useState(null);
     const [imageUploadProgress, setImageUploadProgress] = useState(null);
     const [imageUploadError, setImageUploadError] = useState(null);
     const [formData, setFormData] = useState({});
-    const [publishError, setPublishError] = useState(null);
+    // const [formData, setFormData] = useState({
+    //     title: '',
+    //     category: 'Uncategorized',
+    //     tags: '',
+    //     content: '',
+    //     image: ''
+    //   });
+    const [updateError, setUpdateError] = useState(null);
+    const { currentUser } = useSelector((state) => state.user);
+    const { postId } = useParams();
+    
     const navigate = useNavigate();
+    
+
+    useEffect(() => {
+        try {
+          const fetchPost = async () => {
+            const res = await fetch(`/api/post/get-posts?postId=${postId}`);
+            const data = await res.json();
+            if (!res.ok) {
+              console.log(data.message);
+              setUpdateError(data.message);
+              return;
+            }
+            if (res.ok) {
+              setUpdateError(null);
+              setFormData(data.posts[0]);
+            }
+          };
+    
+          fetchPost();
+        } catch (error) {
+          console.log(error.message);
+          setUpdateError(error.message);
+        }
+      }, [postId]);
 
     const handleUploadImage = async() => {
         try {
@@ -53,45 +88,52 @@ export default function CreatePost() {
         }
     };
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+         // Extract username from JWT token
+         // const token = localStorage.getItem('access_token');
+         // const decodedToken = jwt_decode(token);
+         // const username = decodedToken.username;
 
-        // // Extract username from JWT token
-        // const token = localStorage.getItem('access_token');
-        // const decodedToken = jwt_decode(token);
-        // const username = decodedToken.username;
-
-        // // Add username to formData
-        // const updatedFormData = { ...formData, author: username };
-
+         // // Add username to formData
+         // const updatedFormData = { ...formData, author: username };
         try {
-            const res = await fetch('/api/post/create-post', {
-                method: 'POST',
+            // console.log("Submitting formData:", formData); // Log formData
+            const res = await fetch(`/api/post/update-post/${formData._id}/${currentUser._id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData),
             });
+    
             const data = await res.json();
+            // console.log("Response status:", res.status); // Log response status
+            // console.log("Response data:", data); // Log response data
+    
             if (!res.ok) {
-                setPublishError(data.message);
+                setUpdateError(data.message);
                 return;
-            } else {
-                setPublishError(null);
-                navigate(`/post/${data.slug}`);
             }
+
+            setUpdateError(null);
+            navigate(`/post/${data.slug}`);
         } catch (error) {
-            setPublishError('Something went wrong!');
+            // console.error("Error during post update:", error); // Log error
+            setUpdateError('Something went wrong!');
         }
     };
+    
+
+    
 
   return (
     <div className='p-3 max-w-3xl mx-auto min-h-screen'>
-        <h1 className='text-center text-3xl my-7 font-semibold'>Create a post</h1>
+        <h1 className='text-center text-3xl my-7 font-semibold'>Update post</h1>
         <form className='flex flex-col gap-4' onSubmit={handleSubmit} >
             <div className='flex flex-col gap-4 sm:flex-row sm:justify-between'>
-                <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
-                <Select onChange={(e) => setFormData({ ...formData, category: e.target.value })} >
+                <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({ ...formData, title: e.target.value  })} value={formData.title} />
+                <Select onChange={(e) => setFormData({ ...formData, category: e.target.value })} value={formData.category} >
                     |<option value='Uncategorzed'>Select A Category</option>
                     |<option value='javascript'>JavaScript</option>
                     |<option value='reactjs'>React.js</option>
@@ -127,18 +169,19 @@ export default function CreatePost() {
                     const tagsArray = e.target.value.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
                     setFormData({ ...formData, tags: tagsArray });
                 }}
+                value={formData.tags}
             />
             <ReactQuill theme='snow' placeholder='Write down your idea' className='h-72 mb-12' required onChange={
                 (value) => {
                     setFormData({ ...formData, content: value })
                 }
-            } />
+            } value={formData.content} />
             <Button type='submit' gradientDuoTone='purpleToPink' >
-                Publish
+                Update Post
             </Button>
             {
-                publishError && <Alert className='mt-5' color='failure'>
-                    {publishError}
+                updateError && <Alert className='mt-5' color='failure'>
+                    {updateError}
                 </Alert>
             }
         </form>

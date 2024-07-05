@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button, Modal, Table, TableHeadCell } from 'flowbite-react'
+import { Alert, Button, Modal, Table, TableHeadCell } from 'flowbite-react'
 import { HiOutlineExclamationCircle } from 'react-icons/hi'
 
 export default function UserAllPosts() {
-    const { currentUser } = useSelector(state => state.user);
+    const { currentUser, error } = useSelector(state => state.user);
     const [userPosts, setUserPosts] = useState([]);
     const [showMore, setShowMore] = useState(true);
     const [showModal, setShowModal] = useState(false);
-    const [postIdToDelete, setPostIdToDelete] =useState('')
+    const [postIdToDelete, setPostIdToDelete] =useState('');
+    // const [deletePostSuccess, setDeletPostSucces] = useState(null);
+    // const [deletePostError, setDeletPostError] = useState(null);
+    const [deletePostSuccess, setDeletePostSuccess] = useState(null);
+    const [deletePostError, setDeletePostError] = useState(null);
 
     useEffect(() => {
       const fetchPosts = async () => {
@@ -58,36 +62,18 @@ export default function UserAllPosts() {
         const data = await res.json();
         if (!res.ok) {
           console.log(data.message);
+          setDeletePostError(data.message);
         } else {
           setUserPosts((prev) => 
           prev.filter((post) => post._id !== postIdToDelete)
           );
+          setDeletePostSuccess(data.message);
         }
       } catch (error) {
         console.log(error.message);
+        setDeletePostError(error.message)
       }
     };
-    // const handleDeletePost = async () => {
-    //   setShowModal(false);
-    //   try {
-    //     const res = await fetch(
-    //       `/api/post/delete-post/${postIdToDelete}/${currentUser._id}`,
-    //       {
-    //         method: 'DELETE',
-    //       }
-    //     );
-    //     const data = await res.json();
-    //     if (!res.ok) {
-    //       console.log(data.message);
-    //     } else {
-    //       setUserPosts((prev) =>
-    //         prev.filter((post) => post._id !== postIdToDelete)
-    //       );
-    //     }
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }
-    // };
 
   return (
     <div className='flex flex-col md:mx-auto'>
@@ -161,6 +147,22 @@ export default function UserAllPosts() {
           </>
         ) : (
           <p>You have no posts yet</p>
+        )}
+
+        {deletePostSuccess && (
+          <Alert color='success' className='mt-5'>
+            {deletePostSuccess}
+          </Alert>
+        )}
+        {deletePostError && (
+          <Alert color='failure' className='mt-5'>
+            {deletePostError}
+          </Alert>
+        )}
+        {error && (
+          <Alert color='failure' className='mt-5'>
+            {error}
+          </Alert>
         )}
 
         <Modal 

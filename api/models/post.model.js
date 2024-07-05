@@ -21,7 +21,7 @@ const postSchema = new mongoose.Schema(
         },
         image: {
             type: String,
-            default: 'https://www.wpexplorer.com/wp-content/uploads/wordpress-blog-post-checklist-guide.jpg',
+            default: 'https://blog.devziaus.xyz/images/welcome.webp',
         },
         category: {
             type: String,

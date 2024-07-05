@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute'
 import OnlyAdminRoute from './components/OnlyAdminRoute'
 import CreatePost from './pages/CreatePost'
 import AdminOrAuthorRoute from './components/AdminOrAuthorRoute'
+import UpdatePost from './pages/UpdatePost'
 
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
         </Route>
         <Route element={<AdminOrAuthorRoute />}>
           <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
         <Route path='/projects' element={<Projects />} />
       </Routes>
