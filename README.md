@@ -57,8 +57,8 @@ Welcome to the MERN Stack Blog Application! This project is a full-fledged blog 
 
 1. **Clone the repository:**
     ```
-    git clone https://github.com/your-username/mern-blog-app.git
-    cd mern-blog-app
+    git clone https://github.com/DevZiaus/mern-stack-blog.git
+    cd mern-stack-blog
     ```
 
 2. **Install dependencies for both client and server:**
