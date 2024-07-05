@@ -74,7 +74,7 @@ Welcome to the MERN Stack Blog Application! This project is a full-fledged blog 
 
 3. **Set up environment variables:**
 
-    Create a `.env` file in the `api` directory and add the following:
+    Create a `.env` file in the `root` of the project:
     ```
     PORT=3000
     ONLINE_MONGODB= your_ONLINE_mongodb_connection_string
