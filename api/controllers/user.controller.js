@@ -98,7 +98,7 @@ export const updateUser = async( req, res, next ) => {
 };
 
 export const deleteUser = async(req, res, next) => {
-    if (req.user.id !== req.params.userID) {
+    if (!req.user.role === 'admin' && req.user.id !== req.params.userID) {
         return next(errorHandler(403, 'You are not allowed to delete this user!'));
     }
     try {
@@ -117,9 +117,6 @@ export const signout = (req, res, next) => {
     }
 };
 
-// TODO: Make functionality of user can't see all the users, 
-// TODO: authors can see all the users but cant edit or delete, 
-// TODO: Only admin can see all the users edidt them or delete them
   
 export const getUsers = async (req, res, next) => {
     if (!req.user.role === 'admin' || !req.user.role === 'author') {
@@ -163,3 +160,9 @@ export const getUsers = async (req, res, next) => {
         next(error);
     }
 }
+
+
+// TODO: 
+// Create User profile
+// Add functionality to create user for admin
+// Add functionality to edit user for admin
