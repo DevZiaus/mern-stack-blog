@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button, Spinner } from 'flowbite-react'
+import CallToAction from '../components/CallToAction';
 
 export default function singlePost() {
   const { slug } = useParams();
@@ -56,6 +57,9 @@ export default function singlePost() {
         <span className='italic'>{post && (post.content.length/1000).toFixed()} Mins Read</span>
       </div>
       <div className='p-3 max-w-2xl mx-auto w-full post-content' dangerouslySetInnerHTML={{__html: post && post.content}}>
+      </div>
+      <div className='max-w-4xl mx-auto w-full'>
+        <CallToAction />
       </div>
     </main>
   )
