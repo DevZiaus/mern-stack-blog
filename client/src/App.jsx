@@ -13,6 +13,7 @@ import OnlyAdminRoute from './components/OnlyAdminRoute'
 import CreatePost from './pages/CreatePost'
 import AdminOrAuthorRoute from './components/AdminOrAuthorRoute'
 import UpdatePost from './pages/UpdatePost'
+import SinglePost from './pages/SinglePost'
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
           <Route path='/update-post/:postId' element={<UpdatePost />} />
         </Route>
         <Route path='/projects' element={<Projects />} />
+        <Route path='/post/:slug' element={<SinglePost />} />
       </Routes>
 
       <FooterCom />
