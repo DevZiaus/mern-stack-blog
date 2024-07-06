@@ -122,7 +122,7 @@ export const signout = (req, res, next) => {
 // TODO: Only admin can see all the users edidt them or delete them
   
 export const getUsers = async (req, res, next) => {
-    if (!req.user.role === 'admin' || req.user.role === 'author') {
+    if (!req.user.role === 'admin' || !req.user.role === 'author') {
         return next(errorHandler(403, 'You are not authorised to see all the users!'))
     }
     try {
