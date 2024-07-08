@@ -14,11 +14,13 @@ import CreatePost from './pages/CreatePost'
 import AdminOrAuthorRoute from './components/AdminOrAuthorRoute'
 import UpdatePost from './pages/UpdatePost'
 import SinglePost from './pages/SinglePost'
+import ScrollToTop from './components/ScrollToTop'
 
 
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Header />
       
       <Routes>
