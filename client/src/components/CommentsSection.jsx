@@ -1,35 +1,15 @@
 import { Alert, Button, Textarea } from 'flowbite-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Comment from './Comment';
 
 export default function CommentsSection({postId}) {
     const { currentUser } = useSelector( state => state.user );
     const [comment, setComment] = useState('');
-    const [commentError, setCommentError] =useState(null);
+    const [commentError, setCommentError] = useState(null);
+    const [comments, setComments] = useState([]);
 
-    // const handleSubmit = async(e) => {
-    //     e.preventDefault();
-    //     if(comment.length > 200) {
-    //         return;
-    //     };
-    //     try {
-    //         const res = await fetch('/api/comment/create', {
-    //             method: 'POST',
-    //             headers:{
-    //                 'content-type': 'application/json',
-    //             },
-    //             body: JSON.stringify({ content:comment, postId, userId: currentUser._id }),
-    //         });
-    //         const data = await res.json();
-    //         if (res.ok) {
-    //             setComment('');
-    //             setCommentError(null);
-    //         };
-    //     } catch (error) {
-    //         setCommentError(error.message);
-    //     }
-    // }
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (comment.length > 200) {
@@ -44,21 +24,35 @@ export default function CommentsSection({postId}) {
                 },
                 body: JSON.stringify({ content: comment, postId, userId: currentUser._id }),
             });
-            console.log('Raw response:', res);
             const data = await res.json();
             if (res.ok) {
                 setComment('');
                 setCommentError(null);
-                console.log('Comment successfully submitted:', data);
+                setComments([data, ...comments]);
             } else {
                 setCommentError(data.message || 'An error occurred while submitting the comment.');
-                console.log('Error response from server:', data);
             }
         } catch (error) {
             setCommentError(error.message);
-            console.log('Fetch error:', error);
         }
     };
+
+    useEffect(() => {
+        const getComments = async () => {
+            try {
+                const res = await fetch(`/api/comment/getPostComments/${postId}`);
+                if(res.ok){
+                    const data = await res.json();
+                    setComments(data);
+                } else {
+                    console.error(`Failed to fetch comments: ${res.statusText}`);
+                }
+            } catch (error) {
+                console.error(`Error fetching comments: ${error.message}`);
+            }
+        }
+        getComments();
+    }, [postId]);
 
   return (
     <div className='max-w-2xl mx-auto p-3 w-full'>
@@ -106,6 +100,29 @@ export default function CommentsSection({postId}) {
                 </form>
             )
         }
+        {
+            comments.length === 0 ? 
+            ( <p className='text-sm py-3'>No Comments yet!</p> ) :
+            (
+                <>
+                    <div className='flex my-3 gap-1 text-sm items-center'>
+                        <p>Comments</p>
+                        <div className='border border-gray-400 py-1 px-2 rounded-sm'>
+                            <p>{comments.length}</p>
+
+                        </div>
+                    </div>
+                    {
+                        comments.map(comment => (
+                            <Comment 
+                                key={comment._id}
+                                comment={comment}
+                            />
+                        ))
+                    }
+                </>
+            )
+        }
     </div>
-  )
+  );
 }
