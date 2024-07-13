@@ -68,7 +68,7 @@ export default function CommentsSection({postId}) {
             );
             const data = await res.json();
             setComments(comments.map((comment) => 
-                comment._Id === commentId ? {
+                comment._id === commentId ? {
                     ...comment,
                     likes: data.likes,
                     numberOfLikes: data.numberOfLikes
@@ -78,6 +78,12 @@ export default function CommentsSection({postId}) {
         } catch (error) {
             console.log(error.message);
         }
+    };
+
+    const handleEdit = (commentId, editedContent) => {
+        setComments(comments.map(c =>
+            c._id === commentId ? { ...c, content: editedContent } : c
+        ));
     };
 
   return (
@@ -139,11 +145,12 @@ export default function CommentsSection({postId}) {
                         </div>
                     </div>
                     {
-                        comments.map(comment => (
-                            <Comment 
+                        comments.map((comment) => (
+                            <Comment
                                 key={comment._id}
                                 comment={comment}
                                 onLike={handleLike}
+                                onEdit={handleEdit}
                             />
                         ))
                     }
