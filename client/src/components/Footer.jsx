@@ -19,7 +19,7 @@ export default function FooterCom() {
                 <Footer.Link href='/about'>
                   About Us
                 </Footer.Link>
-                <Footer.Link href='https://devziaus.xyz' target='blank' rel='noopener noreferrer'>
+                <Footer.Link href='https://devziaus.xyz' target='_blank' rel='noopener noreferrer'>
                   DevZiaus
                 </Footer.Link>
               </Footer.LinkGroup>
@@ -27,16 +27,16 @@ export default function FooterCom() {
             <div>
               <Footer.Title title='Follow Us' />
               <Footer.LinkGroup col>
-                <Footer.Link href='https://github.com/DevZiaus' target='blank' rel='noopener noreferrer'>
+                <Footer.Link href='https://github.com/DevZiaus' target='_blank' rel='noopener noreferrer'>
                   Github
                 </Footer.Link>
-                <Footer.Link href='https://www.facebook.com/DevZiaus' target='blank' rel='noopener noreferrer'>
+                <Footer.Link href='https://www.facebook.com/DevZiaus' target='_blank' rel='noopener noreferrer'>
                   Facebook
                 </Footer.Link>
-                <Footer.Link href='https://www.twitter.com/DevZiaus' target='blank' rel='noopener noreferrer'>
+                <Footer.Link href='https://www.twitter.com/DevZiaus' target='_blank' rel='noopener noreferrer'>
                   Twitter
                 </Footer.Link>
-                <Footer.Link href='https://www.instagram.com/DevZiaus' target='blank' rel='noopener noreferrer'>
+                <Footer.Link href='https://www.instagram.com/DevZiaus' target='_blank' rel='noopener noreferrer'>
                   Instagram
                 </Footer.Link>
               </Footer.LinkGroup>
