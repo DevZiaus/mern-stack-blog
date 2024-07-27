@@ -106,8 +106,8 @@ export const getComments = async(req, res, next) => {
         const totalComments = await Comment.countDocuments();
         const now = new Date();
         const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
-        const lastMonthsComment = await Comment.countDocuments({createdAt: {$gte : oneMonthAgo}});
-        res.status(200).json({totalComments, lastMonthsComment, comments})
+        const lastMonthsComments = await Comment.countDocuments({createdAt: {$gte : oneMonthAgo}});
+        res.status(200).json({totalComments, lastMonthsComments, comments})
     } catch (error) {
         next(error);
     }
