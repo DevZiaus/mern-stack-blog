@@ -11,4 +11,5 @@ router.put('/editComment/:commentId', verifyToken ,editComment);
 router.delete('/deleteComment/:commentId', verifyToken ,deleteComment);
 router.get('/get-Comments/', verifyToken, getComments);
 
+
 export default router;
