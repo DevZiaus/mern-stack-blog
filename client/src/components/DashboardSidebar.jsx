@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation, Link } from 'react-router-dom'
-import { Sidebar } from 'flowbite-react'
-import { HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser } from 'react-icons/hi'
-import { signOutSuccess } from '../redux/user/userSlice'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import { Sidebar } from 'flowbite-react';
+import { HiAnnotation, HiArrowSmRight, HiDocumentText, HiOutlineUserGroup, HiUser } from 'react-icons/hi';
+import { signOutSuccess } from '../redux/user/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function DashboardSidebar() {
     const location = useLocation();
@@ -63,6 +62,7 @@ export default function DashboardSidebar() {
                     </Sidebar.Item>
                 </Link>
                 {(currentUser.role === 'admin' || currentUser.role === 'author') && (
+                  <>
                   <Link to='/dashboard?tab=posts'>
                     <Sidebar.Item 
                       active={ tab === 'posts' }
@@ -72,8 +72,6 @@ export default function DashboardSidebar() {
                       Posts
                     </Sidebar.Item>
                 </Link>
-                )}
-                {(currentUser.role === 'admin' || currentUser.role === 'author') && (
                   <Link to='/dashboard?tab=users'>
                     <Sidebar.Item 
                       active={ tab === 'users' }
@@ -83,8 +81,17 @@ export default function DashboardSidebar() {
                       Users
                     </Sidebar.Item>
                 </Link>
-                )}
-                
+                <Link to='/dashboard?tab=comments'>
+                    <Sidebar.Item 
+                      active={ tab === 'comments' }
+                      icon={HiAnnotation}
+                      as='div'
+                    >
+                      Comments
+                    </Sidebar.Item>
+                </Link>
+                </>
+                )}                
                 <Sidebar.Item onClick={handleSignOut} icon={HiArrowSmRight} className='cursor-pointer'>
                     Sign Out
                 </Sidebar.Item>

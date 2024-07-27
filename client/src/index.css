@@ -53,3 +53,9 @@ body {
 	border-radius: .25rem;
 	font-size: .9rem;
 }
+
+@media (prefers-color-scheme: dark) {
+  .post-content code {
+    color: #201f1f;
+  }
+}

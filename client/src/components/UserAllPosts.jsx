@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Alert, Button, Modal, Table } from 'flowbite-react'
-import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Alert, Button, Modal, Table } from 'flowbite-react';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 export default function UserAllPosts() {
     const { currentUser, error } = useSelector(state => state.user);

@@ -91,3 +91,24 @@ export const deleteComment = async(req, res, next) => {
         next(error);
     }
 };
+
+export const getComments = async(req, res, next) => {
+    if(!(req.user.role === 'admin' || req.user.role === 'author') ) {
+        return next(errorHandler(403, 'You are not authorised to see the comments'));
+    }
+    try {
+        const startIndex = parseInt(req.query.startIndex) || 0;
+        const limit = parseInt(req.query.limit) || 9;
+        const sortDirection = req.query.order === 'asc' ? 1 : -1;
+        const comments = await Comment.find()
+        .sort({createdAt: sortDirection})
+        .limit(limit);
+        const totalComments = await Comment.countDocuments();
+        const now = new Date();
+        const oneMonthAgo = new Date(now.getFullYear(), now.getMonth() - 1, now.getDate());
+        const lastMonthsComment = await Comment.countDocuments({createdAt: {$gte : oneMonthAgo}});
+        res.status(200).json({totalComments, lastMonthsComment, comments})
+    } catch (error) {
+        next(error);
+    }
+};

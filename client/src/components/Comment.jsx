@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { FaThumbsUp } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
-import { Button, Textarea } from 'flowbite-react'
+import { Button, Textarea } from 'flowbite-react';
 
 export default function Comment({ comment, onLike, onEdit, onDelete }) {
     const [user, setUser] = useState({});

@@ -1,13 +1,13 @@
-import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react'
-import React, { useEffect, useState } from 'react'
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
-import ReactQuill from 'react-quill'
-import 'react-quill/dist/quill.snow.css'
-import { app } from '../firebase'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import 'react-circular-progressbar/dist/styles.css'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { Alert, Button, FileInput, Select, TextInput } from 'flowbite-react';
+import { useEffect, useState } from 'react';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { app } from '../firebase';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // import jwt_decode from 'jwt-decode'; // Import jwt-decode library
 
 export default function UpdatePost() {

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react'
-import { useDispatch, useSelector } from 'react-redux'
-import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
-import OAuth from '../components/OAuth'
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
+import OAuth from '../components/OAuth';
 
 
 export default function SignIn() {

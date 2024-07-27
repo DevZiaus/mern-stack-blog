@@ -1,13 +1,13 @@
-import { Alert, Button, Modal, TextInput,Textarea } from 'flowbite-react'
-import React, { useEffect, useRef, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage'
-import { app } from '../firebase'
-import { CircularProgressbar } from 'react-circular-progressbar'
-import 'react-circular-progressbar/dist/styles.css'
-import { updateStart, updateSuccess, updateFailure, deleteStart, deleteSuccess, deleteFailure, signOutSuccess, } from '../redux/user/userSlice'
-import { HiOutlineExclamationCircle } from 'react-icons/hi'
-import { Link } from 'react-router-dom'
+import { Alert, Button, Modal, TextInput,Textarea } from 'flowbite-react';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
+import { app } from '../firebase';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { updateStart, updateSuccess, updateFailure, deleteStart, deleteSuccess, deleteFailure, signOutSuccess, } from '../redux/user/userSlice';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 export default function DashboardProfile() {
   const { currentUser, error, loading } = useSelector((state) => state.user);

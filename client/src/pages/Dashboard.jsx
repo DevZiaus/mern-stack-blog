@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import DashboardSidebar from '../components/DashboardSidebar';
 import DashboardProfile from '../components/DashboardProfile';
 import UserAllPosts from '../components/UserAllPosts';
 import AllUsers from '../components/AllUsers';
+import DashboardComments from '../components/DashboardComments';
 
 export default function Dashboard() {
   const location = useLocation();
@@ -28,6 +29,8 @@ export default function Dashboard() {
       {tab === 'posts' && <UserAllPosts /> }
       {/* {Users...} */}
       {tab === 'users' && <AllUsers /> }
+      {/* Comments */}
+      {tab === 'comments' && <DashboardComments />}
     </div>
   )
 }

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { Alert, Button, Modal, Table } from 'flowbite-react'
-import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Alert, Button, Modal, Table } from 'flowbite-react';
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
 export default function allUsers() {
     const { currentUser, error } = useSelector(state => state.user);
@@ -95,8 +95,8 @@ export default function allUsers() {
                 <Table.HeadCell>Picture</Table.HeadCell>
                 <Table.HeadCell>User Name</Table.HeadCell>
                 <Table.HeadCell>Name</Table.HeadCell>
-                <Table.HeadCell>Role</Table.HeadCell>
                 <Table.HeadCell>Email</Table.HeadCell>
+                <Table.HeadCell>Role</Table.HeadCell>
                 {currentUser.role === 'admin' && (
                 <>
                   <Table.HeadCell>Delete</Table.HeadCell>
@@ -128,10 +128,10 @@ export default function allUsers() {
                       {user.name || '--'}
                     </Table.Cell>
                     <Table.Cell>
-                      {user.role}
+                      {user.email || '--'}
                     </Table.Cell>
                     <Table.Cell>
-                      {user.email || '--'}
+                      {user.role}
                     </Table.Cell>
                     {currentUser.role === 'admin' && (
                       <>
