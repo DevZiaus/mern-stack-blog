@@ -43,7 +43,7 @@ export default function Header() {
       <Button className='w-12 h-10 lg:hidden' color='gray' pill>
         <AiOutlineSearch />
       </Button>
-      <Button className='w-12 h-10 hidden sm:inline' color='gray' pill onClick={() => dispatch(toggleTheme())}>
+      <Button className='w-12 h-10 inline' color='gray' pill onClick={() => dispatch(toggleTheme())}>
         {theme === 'light' ? <FaMoon /> : <FaSun />}
       </Button>
       <div className='flex gap-2 md:order-2'>
