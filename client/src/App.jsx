@@ -14,6 +14,7 @@ import AdminOrAuthorRoute from './components/AdminOrAuthorRoute';
 import UpdatePost from './pages/UpdatePost';
 import SinglePost from './pages/SinglePost';
 import ScrollToTop from './components/ScrollToTop';
+import Search from './pages/Search';
 
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
         <Route path='/about' element={<About />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/search' element={<Search />} />
         <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
         </Route>

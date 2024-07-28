@@ -92,7 +92,7 @@ export default function CreatePost() {
             <div className='flex flex-col gap-4 sm:flex-row sm:justify-between'>
                 <TextInput type='text' placeholder='Title' required id='title' className='flex-1' onChange={(e) => setFormData({ ...formData, title: e.target.value })} />
                 <Select onChange={(e) => setFormData({ ...formData, category: e.target.value })} >
-                    |<option value='Uncategorzed'>Select A Category</option>
+                    |<option value='uncategorzed'>Select A Category</option>
                     |<option value='javascript'>JavaScript</option>
                     |<option value='reactjs'>React.js</option>
                     |<option value='nextjs'>Next.js</option>
